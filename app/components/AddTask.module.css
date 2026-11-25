@@ -1,0 +1,35 @@
+
+.addTaskForm {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.addTaskForm input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+}
+
+.addTaskForm input:focus {
+  border-color: #0070f3;
+}
+
+.addTaskForm button {
+  padding: 12px 20px;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.addTaskForm button:hover {
+  background-color: #0056b3;
+}
