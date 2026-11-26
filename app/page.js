@@ -1,15 +1,22 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import AddTask from "./components/AddTask";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+const API_URL = (
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"
+).replace(/\/+$/, "");
+
 const TASKS_ENDPOINT = `${API_URL}/api/tasks`;
 
 const apiRequest = async (url, options = {}) => {
   const response = await fetch(url, {
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
     ...options,
   });
 
@@ -54,6 +61,7 @@ export default function Home() {
 
       setTasks((prevTasks) => [newTask, ...prevTasks]);
       setShowAddTask(false);
+
       return true;
     } catch (err) {
       setError(err.message);
@@ -70,7 +78,9 @@ export default function Home() {
       });
 
       setTasks((prevTasks) =>
-        prevTasks.map((task) => (task.id === id ? updatedTask : task))
+        prevTasks.map((task) =>
+          task.id === id ? updatedTask : task
+        )
       );
     } catch (err) {
       setError(err.message);
@@ -81,9 +91,13 @@ export default function Home() {
     try {
       setError("");
 
-      await apiRequest(`${TASKS_ENDPOINT}/${id}`, { method: "DELETE" });
+      await apiRequest(`${TASKS_ENDPOINT}/${id}`, {
+        method: "DELETE",
+      });
 
-      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      setTasks((prevTasks) =>
+        prevTasks.filter((task) => task.id !== id)
+      );
     } catch (err) {
       setError(err.message);
     }
@@ -107,10 +121,14 @@ export default function Home() {
       {error && <p className={styles.error}>{error}</p>}
 
       <div className={styles.taskList}>
-        {loading && <p className={styles.info}>Loading tasks...</p>}
+        {loading && (
+          <p className={styles.info}>Loading tasks...</p>
+        )}
 
         {!loading && tasks.length === 0 && (
-          <p className={styles.info}>No tasks yet. Add your first task.</p>
+          <p className={styles.info}>
+            No tasks yet. Add your first task.
+          </p>
         )}
 
         {tasks.map((task) => (
@@ -118,12 +136,18 @@ export default function Home() {
             <div>
               <h3
                 className={
-                  task.status === "completed" ? styles.completed : undefined
+                  task.status === "completed"
+                    ? styles.completed
+                    : undefined
                 }
               >
                 {task.title}
               </h3>
-              <p className={styles.taskMeta}>Status: {task.status}</p>
+
+              <p className={styles.taskMeta}>
+                Status: {task.status}
+              </p>
+
               <p className={styles.taskMeta}>
                 Date: {new Date(task.date).toLocaleDateString("en-GB")}
               </p>
