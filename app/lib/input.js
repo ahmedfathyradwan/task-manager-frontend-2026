@@ -7,9 +7,9 @@ export const toLatinDigits = (value) =>
     .replace(EXTENDED_ARABIC_INDIC, (char) => String(char.charCodeAt(0) - 0x06f0));
 
 export const sanitizePhoneInput = (value) =>
-  toLatinDigits(value).replace(/\D/g, "").slice(0, 15);
+  toLatinDigits(value).replace(/\D/g, "").slice(0, 11);
 
 export const sanitizePasswordInput = (value) =>
   toLatinDigits(value).replace(/\D/g, "").slice(0, 4);
 
-export const isValidPhone = (value) => /^\d{8,15}$/.test(value);
+export const isValidPhone = (value) => /^01[0125]\d{8}$/.test(value);

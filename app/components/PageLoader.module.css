@@ -15,9 +15,8 @@
   width: 58px;
   height: 58px;
   border-radius: 18px;
-  background: var(--brand-gradient);
+  background: var(--primary-fill);
   color: #fff;
-  box-shadow: var(--shadow-primary);
   animation: float 2.6s ease-in-out infinite;
 }
 

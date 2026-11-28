@@ -283,7 +283,7 @@
 .progressFill {
   height: 100%;
   border-radius: inherit;
-  background: var(--brand-gradient);
+  background: var(--primary-fill);
   transition: width 0.3s var(--ease);
 }
 

@@ -49,19 +49,13 @@ function ProgressRing({ percent, label }) {
   return (
     <div className={styles.ring} role="img" aria-label={label}>
       <svg viewBox="0 0 100 100">
-        <defs>
-          <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" className={styles.ringGradStart} />
-            <stop offset="100%" className={styles.ringGradEnd} />
-          </linearGradient>
-        </defs>
         <circle cx="50" cy="50" r={radius} className={styles.ringTrack} />
         <circle
           cx="50"
           cy="50"
           r={radius}
           className={styles.ringFill}
-          stroke="url(#ringGradient)"
+          stroke="var(--primary-fill)"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
         />
