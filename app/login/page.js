@@ -61,8 +61,16 @@ export default function LoginPage() {
       } else {
         await register(fullName.trim(), phone, password);
       }
+
+      setPending(false);
+      setFullName("");
+      setPhone("");
+      setPassword("");
+      setMode("login");
+      setError("");
       router.replace("/");
     } catch (err) {
+      if (err?.code === "PHONE_TAKEN" && mode === "register") setMode("login");
       setError(getErrorMessage(err, t));
       setPending(false);
     }
